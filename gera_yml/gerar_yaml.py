@@ -169,18 +169,18 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
     print(f"✅ Arquivo 'config.yaml' gerado com sucesso para topologia '{topologia}'!")
 
 if __name__ == "__main__":
+
     topologias = [
         "anel",
-        # "estrela",
-        # "totalmente_conectada",
+        "estrela",
+        "totalmente_conectada",
         "tree",
-        # "linha"
+        "linha"
     ]
-    
-    # valor = random.randint(0, len(topologias) - 1)
-    topologia = topologias[0]
-    
-    print(f"Topologia escolhida: {topologia}")
+
+    # Escolha aleatória de topologia
+    topologia = random.choice(topologias)
+    print(f"Topologia escolhida aleatoriamente: {topologia}")
     os.system('pause')
     
     # Exemplo de uso:
