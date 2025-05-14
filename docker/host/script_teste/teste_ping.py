@@ -9,7 +9,7 @@ def teste_de_ping_hosts():
         for r_destino in hosts:
             try:
                 comando = f"docker exec {host} ping -c 1 -W 0.1 172.21.{Host.extrair_ip_hosts(r_destino)}"
-                result = subprocess.run(comando, shell=True, check=True, text=True, capture_output=True)
+                result = subprocess.run(comando, shell=True, check=True, text=True)  # <-- aqui está corrigido
                 if result.returncode == 0:
                     print(Host.formatar_sucesso(f"{host} -> {r_destino}  sucesso."))
             except subprocess.CalledProcessError as e:
@@ -22,6 +22,7 @@ def teste_de_ping_hosts():
         for roteador, destino in falha:
             print(Host.formatar_erro(f"{roteador} -> {destino}  falhou."))
         print('\n')
+
 
 def teste_de_ping_roteadores():
     falha = []
