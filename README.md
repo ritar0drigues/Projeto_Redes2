@@ -1,51 +1,79 @@
 # Projeto de Simulação de Rede de Computadores
 
-Este projeto tem como objetivo:
+Este projeto implementa uma simulação de rede usando Python e Docker, com foco em roteamento e comunicação entre hosts.
 
-- Desenvolver uma simulação de uma rede de computadores composta por hosts e roteadores.
-- Utilizar Python e Docker para implementar a simulação.
-- Implementar o algoritmo de roteamento por estado de enlace (Link State Routing Algorithm) nos roteadores.
+## Como Executar o Projeto
 
-## Pré-requisitos
+### Pré-requisitos
+- Docker instalado
+- Python 3.x
+- pip (gerenciador de pacotes Python)
 
-Certifique-se de ter o Docker e o Make instalado em sua máquina antes de prosseguir.
+### Passos para Execução
 
-## Como executar
+1. Clone o repositório
+2. Execute o menu de controle:
+```bash
+python menu_teste.py
+```
 
-Primeiramente você deve ter o make instalado na sua máquina:
+O menu oferece as seguintes opções:
+1. Gerar arquivo docker-compose.yml
+2. Subir o ambiente
+3. Derrubar os contêineres
+4. Limpar o ambiente
+5. Testar Ping
+6. Testar Rotas
+7. Testar Vias
+8. Testar Ping entre Hosts
+9. Sair
 
-`pip install make`
-
-Para executar o projeto, basta rodar o seguinte comando no terminal:
-
-`make`
+### Fluxo de Execução Recomendado
+1. Primeiro, gere o compose (opção 1)
+2. Suba o ambiente (opção 2)
+3. Execute os testes desejados (opções 5-8)
+4. Ao finalizar, use a opção 9 para sair e limpar o ambiente
 
 ## Protocolo Utilizado
 
-O protocolo utilizado para a comunicação entre os hosts e roteadores é o UDP (User Datagram Protocol). O UDP é um protocolo de transporte que permite a troca de datagramas entre dispositivos em uma rede. Ele é mais leve e rápido do que o TCP (Transmission Control Protocol), mas não garante a entrega dos pacotes, tornando-o adequado para aplicações onde a velocidade é mais importante do que a confiabilidade.
+O projeto utiliza o protocolo UDP (User Datagram Protocol) para comunicação entre hosts e roteadores.
 
-O UDP é amplamente utilizado em aplicações de streaming de áudio e vídeo, jogos online e outras aplicações em tempo real onde a latência é crítica.
+### Justificativa do Protocolo
 
-### Justificativa do uso do UDP
+O UDP foi escolhido pelos seguintes motivos:
+- Baixa latência na comunicação entre hosts
+- Simplicidade na implementação do roteamento
+- Menor overhead de processamento
+- Adequado para simulações de rede em tempo real
+- Eficiente para testes de conectividade e roteamento
 
-O uso do UDP neste projeto é justificado pela necessidade de uma comunicação rápida e eficiente entre os hosts e roteadores. O protocolo UDP permite a troca de mensagens sem a sobrecarga de controle de conexão, o que é ideal para simulações onde a latência deve ser minimizada. Além disso, o UDP é mais simples de implementar e configurar em comparação com o TCP, tornando-o uma escolha adequada para este projeto.
+## Como a Topologia é Construída
 
-## Topologia Construída
+### Estrutura Base
+- Hosts: Pontos finais da rede
+- Roteadores: Responsáveis pelo encaminhamento de pacotes
+- Docker Networks: Simulam as conexões físicas
 
-A topologia construída para a simulação é uma rede de computadores composta por n hosts e n roteadores. Os hosts estão conectados aos roteadores, que por sua vez estão interconectados entre si dependendo do número de roteadores definidos na configuração e da topologia escolhida, pois podemos gerar as seguintes topologias:
+### Tipos de Topologias Suportadas
+- Estrela
+- Anel
+- Totalmente conectada
+- Árvore
+- Linha
 
-- Topologia em estrela
-- Topologia em anel
-- Topologia totalmente conectada
-- Topologia em árvore
-- Topologia em linha
+### Processo de Construção
+1. O arquivo gerar_yaml.py define a estrutura da rede
+2. docker_compose_create.py gera o arquivo de configuração do Docker
+3. Os containers são criados representando hosts e roteadores
+4. As redes Docker são estabelecidas conforme a topologia escolhida
 
-As topologias são escolhidas aleatoriamente no inicio da execução do projeto, garantindo uma variedade de cenários para a simulação. Cada topologia tem suas próprias características e desafios, permitindo uma análise mais abrangente do desempenho da rede.
+### Gerenciamento
+- Cada host possui um IP único na rede
+- Os roteadores implementam o algoritmo de estado de enlace
+- A comunicação é testada através de pings e verificação de rotas
 
-### Como a topologia é construída
-
-A topologia é construída através da definição de n hosts e n roteadores, onde os hosts se conectam aos roteadores. A configuração da topologia é realizada aleatoriamente, permitindo a simulação de diferentes cenários de rede. Dependendo da topologia escolhida, as conexões entre os roteadores podem variar, proporcionando uma análise detalhada do desempenho da rede em diferentes condições.
-
-## Observações
-
-Este projeto foi desenvolvido como parte do curso de Redes II e visa demonstrar conceitos fundamentais de roteamento e simulação de redes.
+## Testes Disponíveis
+- Ping entre hosts
+- Verificação de rotas
+- Teste de vias de comunicação
+- Conectividade entre hosts e roteadores
