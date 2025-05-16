@@ -13,17 +13,33 @@ clean:
 	docker compose down --rmi all --volumes --remove-orphans
 
 teste_ping:
-	
-	@cd docker/roteador/test && python teste_ping.py
+	@if docker ps | grep -q "roteador"; then \
+		cd docker/roteador/test && python teste_ping.py; \
+	else \
+		echo "ERRO: Os containers não estão em execução. Execute 'make all' primeiro."; \
+		exit 1; \
+	fi
 
 teste_rotas:
-	
-	@cd docker/roteador/test && python teste_rotas.py
+	@if docker ps | grep -q "roteador"; then \
+		cd docker/roteador/test && python teste_rotas.py; \
+	else \
+		echo "ERRO: Os containers não estão em execução. Execute 'make all' primeiro."; \
+		exit 1; \
+	fi
 
 teste_vias:
-
-	@cd docker/roteador/test && python teste_vias.py
+	@if docker ps | grep -q "roteador"; then \
+		cd docker/roteador/test && python teste_vias.py; \
+	else \
+		echo "ERRO: Os containers não estão em execução. Execute 'make all' primeiro."; \
+		exit 1; \
+	fi
 
 teste_ping_host:
-	
-	@cd docker/host/script_teste && python teste_ping.py
+	@if docker ps | grep -q "host"; then \
+		cd docker/host/script_teste && python teste_ping.py; \
+	else \
+		echo "ERRO: Os containers não estão em execução. Execute 'make all' primeiro."; \
+		exit 1; \
+	fi
