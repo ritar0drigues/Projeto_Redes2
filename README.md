@@ -8,6 +8,7 @@ Este projeto implementa uma simulação de rede usando Python e Docker, com foco
 - Docker instalado
 - Python 3.x
 - pip (gerenciador de pacotes Python)
+- Bibliotecas Python adicionais: matplotlib, networkx, seaborn
 
 ### Passos para Execução
 
@@ -26,13 +27,14 @@ O menu oferece as seguintes opções:
 6. Testar Rotas
 7. Testar Vias
 8. Testar Ping entre Hosts
-9. Sair
+9. Testar Limiares
+0. Sair
 
 ### Fluxo de Execução Recomendado
 1. Primeiro, gere o compose (opção 1)
 2. Suba o ambiente (opção 2)
-3. Execute os testes desejados (opções 5-8)
-4. Ao finalizar, use a opção 9 para sair e limpar o ambiente
+3. Execute os testes desejados (opções 5-9)
+4. Ao finalizar, use a opção 0 para sair e limpar o ambiente
 
 ## Protocolo Utilizado
 
@@ -77,3 +79,15 @@ O UDP foi escolhido pelos seguintes motivos:
 - Verificação de rotas
 - Teste de vias de comunicação
 - Conectividade entre hosts e roteadores
+- Análise de limiares da rede
+
+### Teste de Limiares
+O teste de limiares realiza medições de conectividade e gera duas visualizações:
+- Um mapa de calor (heatmap) mostrando os tempos de resposta de ping entre todos os roteadores, com indicações de falhas
+- Um grafo direcionado mostrando a topologia da rede e o estado de todas as conexões
+
+### Arquivos Gerados
+Os testes geram dois arquivos de visualização:
+- matriz_ping.png: Mapa de calor usando escala de azuis para tempos de resposta, marcando falhas em vermelho com texto "FALHA"
+- grafico_rede.png: Grafo da rede com nós em azul claro, conexões bem-sucedidas em verde e falhas em vermelho
+

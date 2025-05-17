@@ -16,8 +16,9 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
     base_ip = ipaddress.IPv4Network("172.21.0.0/16")
     subnets = list(base_ip.subnets(new_prefix=24))
     
+   
     
- 
+
     for i in range(num_roteadores):
         rede_nome = f"rede{i+1}"
         subnet = subnets[i]
@@ -29,7 +30,7 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
             'gateway': str(gateway)
         })
 
-      
+     
         for j in range(hosts_por_rede):
             ip_host = subnet.network_address + 10 + j
             router_ip = subnet.network_address + 2
@@ -48,7 +49,7 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
         networks = []
         neighbors = []
 
-       
+   
         if topologia == "anel":
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
@@ -80,13 +81,13 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
                     networks.append({'name': rede_vizinho['name'], 'ip': str(ip_vizinho)})
                     neighbors.append({'id': f'roteador{j+1}', 'cost': 10})
             else:
-              
+               
                 ip_central = ipaddress.IPv4Address(redes[0]['gateway']) + 3 + (i-1)
                 networks.append({'name': redes[0]['name'], 'ip': str(ip_central)})
                 neighbors.append({'id': 'roteador1', 'cost': 10})
 
         elif topologia == "totalmente_conectada":
-            
+          
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
@@ -99,7 +100,7 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
                     neighbors.append({'id': f'roteador{j+1}', 'cost': 10})
 
         elif topologia == "tree":
-            
+           
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
@@ -131,14 +132,14 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
 
-         
+          
             if i < num_roteadores - 1:
                 rede_prox = redes[i + 1]
                 ip_prox = ipaddress.IPv4Address(rede_prox['gateway']) + 2
                 networks.append({'name': rede_prox['name'], 'ip': str(ip_prox)})
                 neighbors.append({'id': f'roteador{i+2}', 'cost': 10})
 
-           
+            
             if i > 0:
                 rede_ant = redes[i - 1]
                 ip_ant = ipaddress.IPv4Address(rede_ant['gateway']) + 3
@@ -176,6 +177,8 @@ if __name__ == "__main__":
         "linha"
     ]
 
+    
+    topologia = random.choice(topologias)
     print(f"Topologia escolhida aleatoriamente: {topologia}")
     os.system('pause')
     
