@@ -184,4 +184,4 @@ if __name__ == "__main__":
     os.system('pause')
     
     # Exemplo de uso:
-    gerar_yaml(6, 2, topologia=topologia)
+    gerar_yaml(4, 2, topologia=topologia)

@@ -4,14 +4,14 @@ x-router-base: &router_base
   cap_add:
     - NET_ADMIN
   build:
-    context: ./docker/roteador
+    context: ./roteador
     dockerfile: Dockerfile
 
 x-host-base: &host_base
   cap_add:
     - NET_ADMIN
   build:
-    context: ./docker/host
+    context: ./host
     dockerfile: Dockerfile
 
 services:

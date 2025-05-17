@@ -28,28 +28,28 @@ def verificar_container(nome_container):
 def testar_ping():
     print("\nExecutando teste de Ping...")
     if verificar_container("roteador"):
-        os.system("cd docker/roteador/test && python teste_ping.py")
+        os.system("cd roteador/test && python teste_ping.py")
     else:
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
 def testar_rotas():
     print("\nExecutando teste de Rotas...")
     if verificar_container("roteador"):
-        os.system("cd docker/roteador/test && python teste_rotas.py")
+        os.system("cd roteador/test && python teste_rotas.py")
     else:
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
 def testar_vias():
     print("\nExecutando teste de Vias...")
     if verificar_container("roteador"):
-        os.system("cd docker/roteador/test && python teste_vias.py")
+        os.system("cd roteador/test && python teste_vias.py")
     else:
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
 def testar_ping_host():
     print("\nExecutando teste de Ping entre Hosts...")
     if verificar_container("host"):
-        os.system("cd docker/host/script_teste && python teste_ping.py")
+        os.system("cd host/script_teste && python teste_ping.py")
     else:
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
