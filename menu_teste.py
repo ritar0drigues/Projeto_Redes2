@@ -53,6 +53,13 @@ def testar_ping_host():
     else:
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
+def testar_limiares():
+    print("\nExecutando teste de Limiares...")
+    if verificar_container("roteador"):
+        os.system("cd roteador/test && python limiares.py")
+    else:
+        print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
+
 def menu():
     while True:
         try:
@@ -65,7 +72,8 @@ def menu():
             print("6 - Testar Rotas")
             print("7 - Testar Vias")
             print("8 - Testar Ping entre Hosts")
-            print("9 - Sair")
+            print("9 - Testar Limiares")
+            print("0 - Sair")
 
             escolha = input("Digite o número da opção desejada: ")
 
@@ -86,6 +94,8 @@ def menu():
             elif escolha == "8":
                 testar_ping_host()
             elif escolha == "9":
+                testar_limiares()
+            elif escolha == "0":
                 derrubar_conteiners()
                 print("Saindo do programa...")
                 break

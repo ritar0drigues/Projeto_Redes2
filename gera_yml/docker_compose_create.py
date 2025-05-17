@@ -2,7 +2,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader
 
 def main():
-    # Carregar configuração do arquivo YAML
+    
     with open('config.yaml') as f:
         config = yaml.safe_load(f)
 
@@ -20,18 +20,18 @@ def main():
             'neighbors_str': ','.join(neighbors)
         })
 
-    # Configurar o ambiente Jinja2
+    
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('docker-compose.j2')
 
-    # Renderizar o template com os dados
+   
     output = template.render(
         routers=routers,
         hosts=config['hosts'],
         networks=config['networks']
     )
 
-    # Salvar o docker-compose.yml gerado
+    
     with open('../docker-compose.yml', 'w') as f:
         f.write(output)
 

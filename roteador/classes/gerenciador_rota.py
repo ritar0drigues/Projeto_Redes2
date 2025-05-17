@@ -61,7 +61,7 @@ class GerenciadorDeRotas:
             if atual:
                 tabela_rotas[destino] = atual
 
-        # Evita que o próximo salto seja o próprio destino
+      
         tabela_rotas = {destino: prox for destino, prox in tabela_rotas.items() if prox != destino}
         
         return tabela_rotas
@@ -100,7 +100,7 @@ class GerenciadorDeRotas:
 
 if __name__ == "__main__":
     
-    # Exemplo de uso
+  
     lsdb = {
     'roteador1': {
         'id': 'roteador1',
@@ -149,17 +149,14 @@ if __name__ == "__main__":
     }
 }
 
-    # Lista de roteadores inativos para teste
+   
     inativos = ['roteador3']
 
-    # print("Vizinhos acessíveis:", verifica_vizinhos("roteador1", lsdb, inativos))
+  
     
     lista_caminhos = {}
     roteador = GerenciadorDeRotas(lsdb,inativos)
-    # Atualiza as rotas levando em consideração os inativos
-    # for roteador in lsdb.keys():
-    #     # print(roteador)
-    #     lista_caminhos[roteador] = dijkstra(roteador, lsdb, inativos)
+  
     
     print(roteador.dijkstra('roteador4'))
-    # print(roteador.dijkstra('roteador4', lsdb, []))
+  

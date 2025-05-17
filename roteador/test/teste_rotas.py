@@ -18,7 +18,7 @@ def teste_de_rotas():
                     comando = f"docker exec {r_origem} traceroute {Manipulacao.extrair_ip_gateway(r_destino)}"
                     result = subprocess.run(comando, shell=True, check=True, text=True, capture_output=True)
                     if result.returncode == 0:
-                        # print(Mensagem.formatar_mensagem(r_destino,(255,255,0)),':',Mensagem.formatar_sucesso(result.stdout))
+                        
                         caminho = Manipulacao.traduzir_caminho(r_origem,result.stdout,len(roteadores))
                         print(Mensagem.formatar_mensagem(r_destino,(255,255,0)),':',Mensagem.formatar_sucesso(caminho))
                 except subprocess.CalledProcessError as e:
@@ -33,7 +33,7 @@ def teste_de_rotas():
 
 def teste():
     try:
-        # roteador1 : roteador5 -> roteador4 -> roteador3 -> roteador3 -> roteador1
+        
         comando = f"docker exec roteador5 traceroute 172.21.0.1"
         result = subprocess.run(comando, shell=True, check=True, text=True, capture_output=True)
         if result.returncode == 0:
@@ -44,5 +44,5 @@ def teste():
 
 if __name__ == "__main__":
     teste_de_rotas()
-    # teste()
+  
     print("Teste de rotas concluído.")

@@ -36,7 +36,6 @@ class LSAManager:
                 sender_ip = addr[0]
                 lsa = json.loads(dados.decode())
                 origem = lsa["id"]
-                # print(f"[{self.ROTEADOR_ID}] Recebendo LSA de {origem} ({sender_ip})")
                 if origem not in lsdb or lsa["seq"] > lsdb[origem]["seq"]:
                     lsdb[origem] = lsa
                     for viz, (ip, _) in self.vizinhos_manager.VIZINHOS.items():

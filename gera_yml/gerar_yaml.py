@@ -15,9 +15,9 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
 
     base_ip = ipaddress.IPv4Network("172.21.0.0/16")
     subnets = list(base_ip.subnets(new_prefix=24))
-    # Para topologia tree, separamos as subnets
     
-    # Geração das redes
+    
+ 
     for i in range(num_roteadores):
         rede_nome = f"rede{i+1}"
         subnet = subnets[i]
@@ -29,28 +29,26 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
             'gateway': str(gateway)
         })
 
-        # Hosts nessa rede
+      
         for j in range(hosts_por_rede):
             ip_host = subnet.network_address + 10 + j
             router_ip = subnet.network_address + 2
             
             hosts.append({
-                'name': f'host{i+1}{chr(97+j)}',  # h1a, h1b, etc
+                'name': f'host{i+1}{chr(97+j)}',  
                 'network': rede_nome,
                 'router': str(router_ip),
                 'ip': str(ip_host)
             })
 
-    # Ate aqui correto
-    
-    # Criando os roteadores
+   
     for i in range(num_roteadores):
         id_roteador = f"roteador{i+1}"
 
         networks = []
         neighbors = []
 
-        # Topologia gerada corretamente
+       
         if topologia == "anel":
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
@@ -75,20 +73,20 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
 
             if i == 0:
-                # Roteador central conecta com todos
+                
                 for j in range(1, num_roteadores):
                     rede_vizinho = redes[j]
                     ip_vizinho = ipaddress.IPv4Address(rede_vizinho['gateway']) + 2
                     networks.append({'name': rede_vizinho['name'], 'ip': str(ip_vizinho)})
                     neighbors.append({'id': f'roteador{j+1}', 'cost': 10})
             else:
-                # Roteadores periféricos conectam só com o central
+              
                 ip_central = ipaddress.IPv4Address(redes[0]['gateway']) + 3 + (i-1)
                 networks.append({'name': redes[0]['name'], 'ip': str(ip_central)})
                 neighbors.append({'id': 'roteador1', 'cost': 10})
 
         elif topologia == "totalmente_conectada":
-            # Todos conectados a todos
+            
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
@@ -101,7 +99,7 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
                     neighbors.append({'id': f'roteador{j+1}', 'cost': 10})
 
         elif topologia == "tree":
-            # Árvore binária sem criar novas redes ponto-a-ponto
+            
             rede_host = redes[i]
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
@@ -133,14 +131,14 @@ def gerar_yaml(num_roteadores, hosts_por_rede, topologia="anel"):
             ip_host_rede = ipaddress.IPv4Address(rede_host['gateway']) + 1
             networks.append({'name': rede_host['name'], 'ip': str(ip_host_rede)})
 
-            # Se houver próximo roteador
+         
             if i < num_roteadores - 1:
                 rede_prox = redes[i + 1]
                 ip_prox = ipaddress.IPv4Address(rede_prox['gateway']) + 2
                 networks.append({'name': rede_prox['name'], 'ip': str(ip_prox)})
                 neighbors.append({'id': f'roteador{i+2}', 'cost': 10})
 
-            # Se houver roteador anterior
+           
             if i > 0:
                 rede_ant = redes[i - 1]
                 ip_ant = ipaddress.IPv4Address(rede_ant['gateway']) + 3
@@ -178,10 +176,8 @@ if __name__ == "__main__":
         "linha"
     ]
 
-    # Escolha aleatória de topologia
-    topologia = random.choice(topologias)
     print(f"Topologia escolhida aleatoriamente: {topologia}")
     os.system('pause')
     
-    # Exemplo de uso:
+  
     gerar_yaml(4, 2, topologia=topologia)

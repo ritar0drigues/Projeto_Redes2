@@ -16,7 +16,7 @@ class VizinhosManager:
             return False
 
     def verifica_roteadores_ativos(self,lsdb):
-        for roteador, dados in list(lsdb.items()):  # Cria uma cópia do dicionário para iteração segura
+        for roteador, dados in list(lsdb.items()): 
             if not self.verifica_tcp(dados["ip"]):
                 print(f"[{self.ROTEADOR_ID}] Roteador {roteador} inativo.")
                 return False

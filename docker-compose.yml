@@ -22,7 +22,7 @@ services:
     environment:
       - ROTEADOR_ID=roteador1
       - ENDERECO_IP=172.21.0.2
-      - VIZINHOS={ "roteador2":["172.21.1.2",10],"roteador3":["172.21.2.2",10] }
+      - VIZINHOS={ "roteador2":["172.21.1.2",10],"roteador3":["172.21.2.2",10],"roteador4":["172.21.3.2",10] }
     networks:
 
       rede1:
@@ -34,6 +34,9 @@ services:
       rede3:
         ipv4_address: 172.21.2.3
 
+      rede4:
+        ipv4_address: 172.21.3.3
+
 
   roteador2:
     <<: *router_base
@@ -41,17 +44,20 @@ services:
     environment:
       - ROTEADOR_ID=roteador2
       - ENDERECO_IP=172.21.1.2
-      - VIZINHOS={ "roteador4":["172.21.3.2",10],"roteador1":["172.21.0.2",10] }
+      - VIZINHOS={ "roteador1":["172.21.0.2",10],"roteador3":["172.21.2.2",10],"roteador4":["172.21.3.2",10] }
     networks:
 
       rede2:
         ipv4_address: 172.21.1.2
 
-      rede4:
-        ipv4_address: 172.21.3.3
-
       rede1:
         ipv4_address: 172.21.0.4
+
+      rede3:
+        ipv4_address: 172.21.2.4
+
+      rede4:
+        ipv4_address: 172.21.3.4
 
 
   roteador3:
@@ -60,7 +66,7 @@ services:
     environment:
       - ROTEADOR_ID=roteador3
       - ENDERECO_IP=172.21.2.2
-      - VIZINHOS={ "roteador1":["172.21.0.2",10] }
+      - VIZINHOS={ "roteador1":["172.21.0.2",10],"roteador2":["172.21.1.2",10],"roteador4":["172.21.3.2",10] }
     networks:
 
       rede3:
@@ -69,6 +75,12 @@ services:
       rede1:
         ipv4_address: 172.21.0.5
 
+      rede2:
+        ipv4_address: 172.21.1.5
+
+      rede4:
+        ipv4_address: 172.21.3.5
+
 
   roteador4:
     <<: *router_base
@@ -76,14 +88,20 @@ services:
     environment:
       - ROTEADOR_ID=roteador4
       - ENDERECO_IP=172.21.3.2
-      - VIZINHOS={ "roteador2":["172.21.1.2",10] }
+      - VIZINHOS={ "roteador1":["172.21.0.2",10],"roteador2":["172.21.1.2",10],"roteador3":["172.21.2.2",10] }
     networks:
 
       rede4:
         ipv4_address: 172.21.3.2
 
+      rede1:
+        ipv4_address: 172.21.0.6
+
       rede2:
-        ipv4_address: 172.21.1.4
+        ipv4_address: 172.21.1.6
+
+      rede3:
+        ipv4_address: 172.21.2.6
 
 
 
