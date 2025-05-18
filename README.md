@@ -6,7 +6,7 @@ Este projeto implementa uma simulação de rede usando Python e Docker, com foco
 
 ### Pré-requisitos
 - Docker instalado
-- Python 3.x
+- Python 3.8
 - pip (gerenciador de pacotes Python)
 - Bibliotecas Python adicionais: matplotlib, networkx, seaborn
 
