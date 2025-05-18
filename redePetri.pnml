@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="Rede_Projeto" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <name><text>Rede de Comunicação com 2 Hosts e 2 Roteadores</text></name>
+    
+    <!-- Places (Lugares) -->
+    <place id="Host1">
+      <name><text>Host1</text></name>
+      <initialMarking><text>1</text></initialMarking>
+    </place>
+    
+    <place id="Roteador1">
+      <name><text>Roteador1</text></name>
+      <initialMarking><text>0</text></initialMarking>
+    </place>
+    
+    <place id="BufferR1R2">
+      <name><text>Buffer_R1_R2</text></name>
+      <initialMarking><text>0</text></initialMarking>
+    </place>
+    
+    <place id="Roteador2">
+      <name><text>Roteador2</text></name>
+      <initialMarking><text>0</text></initialMarking>
+    </place>
+    
+    <place id="Host2">
+      <name><text>Host2</text></name>
+      <initialMarking><text>0</text></initialMarking>
+    </place>
+
+    <!-- Transitions (Transições) -->
+    <transition id="EnviarH1R1">
+      <name><text>Enviar_H1_R1</text></name>
+    </transition>
+    
+    <transition id="ProcessarR1">
+      <name><text>Processar_R1</text></name>
+    </transition>
+    
+    <transition id="EnviarR1R2">
+      <name><text>Enviar_R1_R2</text></name>
+    </transition>
+    
+    <transition id="ProcessarR2">
+      <name><text>Processar_R2</text></name>
+    </transition>
+    
+    <transition id="EnviarR2H2">
+      <name><text>Enviar_R2_H2</text></name>
+    </transition>
+
+    <!-- Arcs (Arcos) -->
+    <!-- Host1 -> Roteador1 (ida) -->
+    <arc id="a1" source="Host1" target="EnviarH1R1">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a2" source="EnviarH1R1" target="Roteador1">
+      <inscription><text>1</text></inscription>
+    </arc>
+    
+    <!-- Roteador1 -> Buffer -> Roteador2 -->
+    <arc id="a3" source="Roteador1" target="ProcessarR1">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a4" source="ProcessarR1" target="BufferR1R2">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a5" source="BufferR1R2" target="EnviarR1R2">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a6" source="EnviarR1R2" target="Roteador2">
+      <inscription><text>1</text></inscription>
+    </arc>
+    
+    <!-- Roteador2 -> Host2 -->
+    <arc id="a7" source="Roteador2" target="ProcessarR2">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a8" source="ProcessarR2" target="EnviarR2H2">
+      <inscription><text>1</text></inscription>
+    </arc>
+    <arc id="a9" source="EnviarR2H2" target="Host2">
+      <inscription><text>1</text></inscription>
+    </arc>
+
+    <!-- Arcos de retorno para permitir simulação contínua -->
+    <arc id="a10" source="Host2" target="EnviarH1R1">
+      <inscription><text>1</text></inscription>
+    </arc>
+
+    <!-- Definições Gráficas -->
+    <graphics>
+      <!-- Posicionamento dos lugares -->
+      <position x="100" y="200" reference="Host1"/>
+      <position x="250" y="200" reference="Roteador1"/>
+      <position x="400" y="200" reference="BufferR1R2"/>
+      <position x="550" y="200" reference="Roteador2"/>
+      <position x="700" y="200" reference="Host2"/>
+      
+      <!-- Posicionamento das transições -->
+      <position x="175" y="200" reference="EnviarH1R1"/>
+      <position x="325" y="200" reference="ProcessarR1"/>
+      <position x="475" y="200" reference="EnviarR1R2"/>
+      <position x="625" y="200" reference="ProcessarR2"/>
+      <position x="775" y="200" reference="EnviarR2H2"/>
+    </graphics>
+  </net>
+</pnml>
