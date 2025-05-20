@@ -74,17 +74,47 @@ O UDP foi escolhido pelos seguintes motivos:
 - Os roteadores implementam o algoritmo de estado de enlace
 - A comunicação é testada através de pings e verificação de rotas
 
-## Testes Disponíveis
-- Ping entre hosts
-- Verificação de rotas
-- Teste de vias de comunicação
-- Conectividade entre hosts e roteadores
-- Análise de limiares da rede
+## Funcionamento da Rede
+
+### Comunicação Entre Hosts
+- Hosts podem se comunicar apenas através dos roteadores
+- Cada host está conectado a um roteador específico
+- A comunicação entre hosts em diferentes redes passa pelo algoritmo de roteamento
+- O caminho entre hosts é determinado pelos roteadores intermediários
+
+### Algoritmo de Roteamento
+- Implementação do protocolo Link State (Estado de Enlace)
+- Propagação automática de informações de roteamento (LSA)
+- Atualização dinâmica das tabelas de roteamento
+- Detecção de falhas e recálculo de rotas
+
+## Testes e Monitoramento
+
+### Ping Entre Hosts
+- Verifica conectividade básica entre hosts
+- Mostra tempos de resposta e falhas
+- Indica problemas de roteamento
+
+### Teste de Rotas
+- Verifica tabelas de roteamento
+- Mostra caminhos disponíveis
+- Identifica gargalos na rede
+
+### Teste de Vias
+- Análise de caminhos alternativos
+- Verificação de redundância
+- Teste de failover
 
 ### Teste de Limiares
-O teste de limiares realiza medições de conectividade e gera duas visualizações:
-- Um mapa de calor (heatmap) mostrando os tempos de resposta de ping entre todos os roteadores, com indicações de falhas
-- Um grafo direcionado mostrando a topologia da rede e o estado de todas as conexões
+- Gera matriz de tempos de resposta
+- Cria mapa de calor da rede
+- Visualiza estado das conexões
+- Identifica pontos de falha
+
+### Arquivos de Diagnóstico
+- matriz_ping.png: Visualização dos tempos de resposta
+- grafico_rede.png: Estado atual da topologia
+- Logs de teste no terminal
 
 ### Arquivos Gerados
 Os testes geram dois arquivos de visualização:
