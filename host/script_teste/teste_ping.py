@@ -1,5 +1,5 @@
 import subprocess
-from host import Host
+from funcoes_host import Host
 
 def teste_de_ping_hosts():
     falha = []

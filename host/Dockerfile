@@ -1,10 +1,8 @@
-# Dockerfile para o host
 FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+COPY host.py /app/host.py 
 
 
 RUN apt-get update && apt-get install -y \
@@ -13,4 +11,4 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     traceroute  
 
-CMD ["/app/start.sh"]
+CMD ["python", "host.py"]

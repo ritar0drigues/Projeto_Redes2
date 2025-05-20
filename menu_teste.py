@@ -47,12 +47,8 @@ def testar_vias():
         print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
 
 def testar_ping_host():
-    print("\nExecutando teste de Ping entre Hosts...")
-    if verificar_container("host"):
-        os.system("cd host/script_teste && python teste_ping.py")
-    else:
-        print("ERRO: Os containers não estão em execução. Execute 'Subir o ambiente' primeiro.")
-
+    os.system("cd host/script_teste && python teste_ping.py")
+        
 def testar_limiares():
     print("\nExecutando teste de Limiares...")
     if verificar_container("roteador"):
